@@ -21,6 +21,9 @@ class _GetchUnix:
         try:
             tty.setraw(sys.stdin.fileno())
             ch = sys.stdin.read(1)
+            # to print input symbols
+            # sys.stdout.write(ch)
+            # sys.stdout.flush()
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch

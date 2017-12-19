@@ -9,9 +9,9 @@ from os.path import isfile
 from os.path import join
 from time import time
 
-import msvcrt
 from os.path import sep
 
+from getch import getch
 
 class KeyGuesser:
     # Конструктор класса с границами и сдвигом
@@ -137,18 +137,17 @@ class KeyGuesser:
 
 
 clf = KeyGuesser()
-clf.read_from_dir('test_data')
+clf.read_from_dir('data')
 clf.create_models()
 
 res = []
 prev_time = time()
 i = 0
 while True:
-    if msvcrt.kbhit():  # если нажата кнопка
-        t = time()
         i += 1
         if i % 10 == 0:
             print(clf.classify(clf.models, res))
-        c = msvcrt.getwch()  # получить символ
+        c = getch()  # получить символ
+        t = time()
         res.append((c, t - prev_time))  # сохранить данные
         prev_time = t
