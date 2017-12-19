@@ -1,6 +1,6 @@
-import msvcrt
 import os
 from time import time
+from getch import getch
 
 chn = int(input('Введите желаемое количество символов:'))
 name = input('Введите имя:')
@@ -13,12 +13,11 @@ res = []
 prev_time = time()
 i = 0
 while i < chn:
-    if msvcrt.kbhit():
         t = time()
         i += 1
         if i % 50 == 0:
             print('entered', i, 'chars')
-        c = msvcrt.getwch()
+        c = getch()
         res.append((c, prev_time - t))
         prev_time = t
 
@@ -29,3 +28,4 @@ if os.path.isfile(name + '.txt'):
 else:
     with open(name + '.txt', 'w') as f:
         print(*res, file=f)
+
